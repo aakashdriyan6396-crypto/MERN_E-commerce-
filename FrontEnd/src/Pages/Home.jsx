@@ -257,7 +257,7 @@ const Home = () => {
           {/* Logo */}
 
           <button
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/admin")}
             className="flex items-center gap-2"
           >
             <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white text-xl shadow-md">
