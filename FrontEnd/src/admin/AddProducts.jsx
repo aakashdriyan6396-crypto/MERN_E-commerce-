@@ -549,7 +549,7 @@ const AddProducts = () => {
               {/* Submit */}
 
               <button 
-                onClick={()=>navigate('/admin/add-product')}
+                
                 type="submit"
                 disabled={loading}
                 className="rounded-xl bg-red-600 px-7 py-3 font-bold text-white shadow-lg shadow-red-200 transition hover:bg-red-700 hover:shadow-xl active:scale-95 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:shadow-none"
