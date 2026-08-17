@@ -21,6 +21,56 @@ const Home = () => {
   const [category, setCategory] = useState("All");
   const [loading, setLoading] = useState(true);
 
+
+
+  // Check if user is already logged in
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    !!localStorage.getItem("token")
+  );
+
+
+
+  const handleLogin = () => {
+    navigate("/login");
+  };
+
+  const handleLogout = async () => {
+    try {
+      setLoading(true);
+
+      const response = await api.post("/user/logout");
+
+      if (response.data.success) {
+        // Remove JWT token
+        localStorage.removeItem("token");
+
+        // Remove user data
+        localStorage.removeItem("user");
+
+        // Update UI
+        setIsLoggedIn(false);
+
+        // Go to login page
+        navigate("/login");
+      }
+    } catch (error) {
+      console.error("Logout Error:", error);
+
+      // Even if backend logout fails,
+      // remove the local authentication data
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+
+      setIsLoggedIn(false);
+
+      navigate("/login");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
+
   // =========================
   // Fetch Products
   // =========================
@@ -41,7 +91,7 @@ const Home = () => {
 
   useEffect(() => {
     fetchProducts();
-  }, []);
+  },[]);
 
   // =========================
   // Save Cart
@@ -250,7 +300,7 @@ const Home = () => {
           NAVBAR
       ====================================================== */}
 
-      <nav className="sticky top-0 z-50 border-b border-red-700 bg-red-600 text-white shadow-xl">
+      <nav className="sticky top-0 z-50 border-b border-blue-700 bg-blue-600 text-white shadow-xl">
 
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-8">
 
@@ -275,14 +325,14 @@ const Home = () => {
 
             <button
               onClick={() => navigate("/")}
-              className="hidden rounded-xl px-4 py-2 text-sm font-bold transition hover:bg-red-700 md:block"
+              className="hidden rounded-xl px-4 py-2 text-sm font-bold transition hover:bg-blue-700 md:block"
             >
               Home
             </button>
 
             <button
               onClick={scrollToProducts}
-              className="hidden rounded-xl px-4 py-2 text-sm font-bold transition hover:bg-red-700 md:block"
+              className="hidden rounded-xl px-4 py-2 text-sm font-bold transition hover:bg-blue-700 md:block"
             >
               Products
             </button>
@@ -291,7 +341,7 @@ const Home = () => {
 
             <button
               onClick={() => navigate("/cart")}
-              className="relative flex items-center gap-2 rounded-xl bg-white px-4 py-2 text-sm font-bold text-red-600 shadow-md transition hover:bg-red-50 active:scale-95"
+              className="relative flex items-center gap-2 rounded-xl bg-white px-4 py-2 text-sm font-bold text-blue-600 shadow-md transition hover:bg-blue-50 active:scale-95"
             >
               🛒
               <span className="hidden sm:inline">
@@ -307,15 +357,23 @@ const Home = () => {
 
             {/* Login */}
 
+              {isLoggedIn ? (
             <button
-              onClick={() => navigate("/login")}
-              className="rounded-xl border border-white/30 px-4 py-2 text-sm font-bold transition hover:bg-white hover:text-red-600 active:scale-95"
+              onClick={handleLogout}
+              disabled={loading}
+              className="rounded-xl bg-white px-5 py-2 font-bold text-blue-600 transition hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-60"
             >
-              👨‍💻
-              <span className="ml-1 hidden sm:inline">
-                Login
-              </span>
+              {loading ? "Logging out..." : "Logout"}
             </button>
+          ) : (
+            <button
+              onClick={handleLogin}
+              className="rounded-xl bg-white px-5 py-2 font-bold text-blue-600 transition hover:bg-gray-100"
+            >
+              Login
+            </button>
+          )}
+
 
           </div>
         </div>
@@ -330,9 +388,9 @@ const Home = () => {
 
         {/* Background Glow */}
 
-        <div className="absolute -left-40 -top-40 h-[500px] w-[500px] rounded-full bg-red-600/20 blur-3xl" />
+        <div className="absolute -left-40 -top-40 h-[500px] w-[500px] rounded-full bg-blue-600/20 blur-3xl" />
 
-        <div className="absolute -bottom-40 -right-40 h-[500px] w-[500px] rounded-full bg-red-500/20 blur-3xl" />
+        <div className="absolute -bottom-40 -right-40 h-[500px] w-[500px] rounded-full bg-blue-500/20 blur-3xl" />
 
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(239,68,68,0.15),transparent_35%)]" />
 
@@ -344,9 +402,9 @@ const Home = () => {
 
             {/* Badge */}
 
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-red-500/30 bg-red-500/10 px-4 py-2 text-sm font-bold text-red-300 backdrop-blur">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-4 py-2 text-sm font-bold text-blue-300 backdrop-blur">
 
-              <span className="h-2 w-2 animate-pulse rounded-full bg-red-500" />
+              <span className="h-2 w-2 animate-pulse rounded-full bg-blue-500" />
 
               New Products Available
 
@@ -358,7 +416,7 @@ const Home = () => {
 
               Everything You Need.
 
-              <span className="block text-red-500">
+              <span className="block text-blue-500">
                 All in One Place.
               </span>
 
@@ -381,7 +439,7 @@ const Home = () => {
 
               <button
                 onClick={scrollToProducts}
-                className="group rounded-xl bg-red-600 px-7 py-4 font-bold text-white shadow-lg shadow-red-600/20 transition duration-300 hover:-translate-y-1 hover:bg-red-700 hover:shadow-xl hover:shadow-red-600/30 active:scale-95"
+                className="group rounded-xl bg-blue-600 px-7 py-4 font-bold text-white shadow-lg shadow-blue-600/20 transition duration-300 hover:-translate-y-1 hover:bg-blue-700 hover:shadow-xl hover:shadow-blue-600/30 active:scale-95"
               >
                 Shop Now
 
@@ -392,7 +450,7 @@ const Home = () => {
 
               <button
                 onClick={() => navigate("/cart")}
-                className="rounded-xl border border-gray-700 bg-white/5 px-7 py-4 font-bold text-white backdrop-blur transition duration-300 hover:-translate-y-1 hover:border-red-500 hover:bg-red-500/10 active:scale-95"
+                className="rounded-xl border border-gray-700 bg-white/5 px-7 py-4 font-bold text-white backdrop-blur transition duration-300 hover:-translate-y-1 hover:border-blue-500 hover:bg-blue-500/10 active:scale-95"
               >
                 🛒 View Cart
               </button>
@@ -446,7 +504,7 @@ const Home = () => {
 
               {/* Glow */}
 
-              <div className="absolute inset-10 rounded-full bg-red-600/30 blur-3xl" />
+              <div className="absolute inset-10 rounded-full bg-blue-600/30 blur-3xl" />
 
               {/* Main Card */}
 
@@ -458,7 +516,7 @@ const Home = () => {
 
                   <div className="flex items-center justify-between">
 
-                    <span className="rounded-full bg-red-500/10 px-3 py-1 text-xs font-bold text-red-400">
+                    <span className="rounded-full bg-blue-500/10 px-3 py-1 text-xs font-bold text-blue-400">
                       SHOPEASE
                     </span>
 
@@ -474,9 +532,9 @@ const Home = () => {
 
                     <div className="relative">
 
-                      <div className="absolute inset-0 rounded-full bg-red-600/40 blur-3xl" />
+                      <div className="absolute inset-0 rounded-full bg-blue-600/40 blur-3xl" />
 
-                      <div className="relative flex h-60 w-60 rotate-[-8deg] items-center justify-center rounded-[3rem] border border-red-400/20 bg-gradient-to-br from-red-500 to-red-900 text-8xl shadow-2xl transition duration-500 hover:rotate-0">
+                      <div className="relative flex h-60 w-60 rotate-[-8deg] items-center justify-center rounded-[3rem] border border-blue-400/20 bg-gradient-to-br from-blue-500 to-blue-900 text-8xl shadow-2xl transition duration-500 hover:rotate-0">
                         🛍️
                       </div>
 
@@ -504,7 +562,7 @@ const Home = () => {
 
                       <button
                         onClick={scrollToProducts}
-                        className="rounded-full bg-red-600 px-4 py-2 text-sm font-bold transition hover:bg-red-700"
+                        className="rounded-full bg-blue-600 px-4 py-2 text-sm font-bold transition hover:bg-blue-700"
                       >
                         Explore →
                       </button>
@@ -566,7 +624,7 @@ const Home = () => {
 
         {/* Bottom Line */}
 
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-red-500 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
 
       </section>
 
@@ -589,8 +647,8 @@ const Home = () => {
               }}
               className={`whitespace-nowrap rounded-full px-5 py-2.5 text-sm font-bold transition ${
                 category === item
-                  ? "bg-red-600 text-white shadow-md shadow-red-200"
-                  : "bg-gray-100 text-gray-600 hover:bg-red-50 hover:text-red-600"
+                  ? "bg-blue-600 text-white shadow-md shadow-blue-200"
+                  : "bg-gray-100 text-gray-600 hover:bg-blue-50 hover:text-blue-600"
               }`}
             >
               {item === "All"
@@ -620,7 +678,7 @@ const Home = () => {
 
           <div>
 
-            <p className="mb-2 text-sm font-bold uppercase tracking-widest text-red-600">
+            <p className="mb-2 text-sm font-bold uppercase tracking-widest text-blue-600">
               Shop Collection
             </p>
 
@@ -634,7 +692,7 @@ const Home = () => {
 
           </div>
 
-          <div className="rounded-full bg-red-50 px-4 py-2 text-sm font-bold text-red-600">
+          <div className="rounded-full bg-blue-50 px-4 py-2 text-sm font-bold text-blue-600">
             {filteredProducts.length} Products Found
           </div>
 
@@ -670,13 +728,13 @@ const Home = () => {
                     setSearch(e.target.value)
                   }
                   placeholder="Search products..."
-                  className="w-full rounded-xl border border-gray-200 bg-gray-50 py-3.5 pl-11 pr-12 outline-none transition focus:border-red-500 focus:bg-white focus:ring-4 focus:ring-red-100"
+                  className="w-full rounded-xl border border-gray-200 bg-gray-50 py-3.5 pl-11 pr-12 outline-none transition focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-100"
                 />
 
                 {search && (
                   <button
                     onClick={() => setSearch("")}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-red-600"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-blue-600"
                   >
                     ✕
                   </button>
@@ -700,7 +758,7 @@ const Home = () => {
                 onChange={(e) =>
                   setCategory(e.target.value)
                 }
-                className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3.5 outline-none transition focus:border-red-500 focus:bg-white focus:ring-4 focus:ring-red-100"
+                className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3.5 outline-none transition focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-100"
               >
                 {categories.map((item) => (
                   <option
@@ -766,7 +824,7 @@ const Home = () => {
 
             <div className="rounded-3xl bg-white px-6 py-20 text-center shadow-sm">
 
-              <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-red-50 text-4xl">
+              <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-blue-50 text-4xl">
                 📦
               </div>
 
@@ -785,7 +843,7 @@ const Home = () => {
                   setSearch("");
                   setCategory("All");
                 }}
-                className="mt-6 rounded-xl bg-red-600 px-6 py-3 font-bold text-white transition hover:bg-red-700"
+                className="mt-6 rounded-xl bg-blue-600 px-6 py-3 font-bold text-white transition hover:bg-blue-700"
               >
                 Reset Filters
               </button>
@@ -816,7 +874,7 @@ const Home = () => {
                     onClick={() =>
                       handleClick(product._id)
                     }
-                    className="group flex h-full cursor-pointer flex-col overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm transition-all duration-300 hover:-translate-y-2 hover:border-red-100 hover:shadow-2xl"
+                    className="group flex h-full cursor-pointer flex-col overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm transition-all duration-300 hover:-translate-y-2 hover:border-blue-100 hover:shadow-2xl"
                   >
 
                     {/* Product Image */}
@@ -839,7 +897,7 @@ const Home = () => {
                         className={`absolute right-3 top-3 rounded-full px-3 py-1.5 text-xs font-bold shadow-sm ${
                           product.stock > 0
                             ? "bg-green-100 text-green-700"
-                            : "bg-red-100 text-red-700"
+                            : "bg-blue-100 text-blue-700"
                         }`}
                       >
                         {product.stock > 0
@@ -858,7 +916,7 @@ const Home = () => {
 
                       {product.category && (
 
-                        <span className="mb-3 inline-block w-fit rounded-lg bg-red-50 px-2.5 py-1 text-xs font-bold text-red-600">
+                        <span className="mb-3 inline-block w-fit rounded-lg bg-blue-50 px-2.5 py-1 text-xs font-bold text-blue-600">
                           {product.category}
                         </span>
 
@@ -885,7 +943,7 @@ const Home = () => {
                             Price
                           </p>
 
-                          <span className="text-2xl font-black text-red-600">
+                          <span className="text-2xl font-black text-blue-600">
                             ₹
                             {Number(
                               product.price
@@ -929,7 +987,7 @@ const Home = () => {
                             disabled={
                               product.stock <= 0
                             }
-                            className="w-full rounded-xl bg-red-600 px-4 py-3.5 font-bold text-white shadow-sm transition hover:bg-red-700 hover:shadow-lg active:scale-95 disabled:cursor-not-allowed disabled:bg-gray-300 disabled:shadow-none"
+                            className="w-full rounded-xl bg-blue-600 px-4 py-3.5 font-bold text-white shadow-sm transition hover:bg-blue-700 hover:shadow-lg active:scale-95 disabled:cursor-not-allowed disabled:bg-gray-300 disabled:shadow-none"
                           >
                             {product.stock > 0
                               ? "🛒 Add to Cart"
@@ -955,7 +1013,7 @@ const Home = () => {
                                 −
                               </button>
 
-                              <div className="flex h-11 flex-1 items-center justify-center rounded-xl bg-red-50 font-black text-red-600">
+                              <div className="flex h-11 flex-1 items-center justify-center rounded-xl bg-blue-50 font-black text-blue-600">
                                 {quantity}
                               </div>
 
@@ -969,7 +1027,7 @@ const Home = () => {
                                   quantity >=
                                   product.stock
                                 }
-                                className="flex h-11 w-11 items-center justify-center rounded-xl bg-red-600 text-xl font-black text-white transition hover:bg-red-700 active:scale-95 disabled:cursor-not-allowed disabled:bg-gray-300"
+                                className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-600 text-xl font-black text-white transition hover:bg-blue-700 active:scale-95 disabled:cursor-not-allowed disabled:bg-gray-300"
                               >
                                 +
                               </button>
@@ -984,7 +1042,7 @@ const Home = () => {
                                   product._id
                                 )
                               }
-                              className="w-full rounded-xl border border-red-100 py-2.5 text-sm font-bold text-red-600 transition hover:bg-red-50"
+                              className="w-full rounded-xl border border-blue-100 py-2.5 text-sm font-bold text-blue-600 transition hover:bg-blue-50"
                             >
                               🗑️ Remove
                             </button>
@@ -1019,7 +1077,7 @@ const Home = () => {
 
           <div className="mb-10 text-center">
 
-            <p className="text-sm font-bold uppercase tracking-widest text-red-600">
+            <p className="text-sm font-bold uppercase tracking-widest text-blue-600">
               Why ShopEase?
             </p>
 
@@ -1035,7 +1093,7 @@ const Home = () => {
 
             <div className="rounded-3xl border border-gray-100 bg-gray-50 p-7 text-center transition hover:-translate-y-1 hover:shadow-lg">
 
-              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-red-100 text-2xl">
+              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-100 text-2xl">
                 🚚
               </div>
 
@@ -1055,7 +1113,7 @@ const Home = () => {
 
             <div className="rounded-3xl border border-gray-100 bg-gray-50 p-7 text-center transition hover:-translate-y-1 hover:shadow-lg">
 
-              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-red-100 text-2xl">
+              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-100 text-2xl">
                 🔒
               </div>
 
@@ -1075,7 +1133,7 @@ const Home = () => {
 
             <div className="rounded-3xl border border-gray-100 bg-gray-50 p-7 text-center transition hover:-translate-y-1 hover:shadow-lg">
 
-              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-red-100 text-2xl">
+              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-100 text-2xl">
                 ⭐
               </div>
 
@@ -1113,7 +1171,7 @@ const Home = () => {
 
               <div className="flex items-center gap-2">
 
-                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-red-600">
+                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600">
                   🛍️
                 </span>
 
@@ -1144,21 +1202,21 @@ const Home = () => {
 
                 <button
                   onClick={() => navigate("/")}
-                  className="block transition hover:text-red-500"
+                  className="block transition hover:text-blue-500"
                 >
                   Home
                 </button>
 
                 <button
                   onClick={scrollToProducts}
-                  className="block transition hover:text-red-500"
+                  className="block transition hover:text-blue-500"
                 >
                   Products
                 </button>
 
                 <button
                   onClick={() => navigate("/cart")}
-                  className="block transition hover:text-red-500"
+                  className="block transition hover:text-blue-500"
                 >
                   Cart
                 </button>
@@ -1180,7 +1238,7 @@ const Home = () => {
 
                 <button
                   onClick={() => navigate("/login")}
-                  className="block transition hover:text-red-500"
+                  className="block transition hover:text-blue-500"
                 >
                   Login
                 </button>
@@ -1189,7 +1247,7 @@ const Home = () => {
                   onClick={() =>
                     navigate("/register")
                   }
-                  className="block transition hover:text-red-500"
+                  className="block transition hover:text-blue-500"
                 >
                   Register
                 </button>
@@ -1225,7 +1283,7 @@ const Home = () => {
 
           <button
             onClick={() => navigate("/cart")}
-            className="flex w-full items-center justify-between rounded-2xl bg-red-600 px-5 py-4 text-white shadow-2xl shadow-red-900/30 transition hover:bg-red-700 active:scale-95"
+            className="flex w-full items-center justify-between rounded-2xl bg-blue-600 px-5 py-4 text-white shadow-2xl shadow-blue-900/30 transition hover:bg-blue-700 active:scale-95"
           >
 
             <div className="flex items-center gap-3">
@@ -1243,7 +1301,7 @@ const Home = () => {
                     : "Items"}
                 </p>
 
-                <p className="text-xs text-red-100">
+                <p className="text-xs text-blue-100">
                   View your cart
                 </p>
 

@@ -98,9 +98,9 @@ const Register = () => {
           Background Decoration
       ========================== */}
 
-      <div className="absolute -left-32 -top-32 h-72 w-72 rounded-full bg-red-200 blur-3xl" />
+      <div className="absolute -left-32 -top-32 h-72 w-72 rounded-full bg-blue-200 blur-3xl" />
 
-      <div className="absolute -bottom-32 -right-32 h-72 w-72 rounded-full bg-red-300 blur-3xl" />
+      <div className="absolute -bottom-32 -right-32 h-72 w-72 rounded-full bg-blue-300 blur-3xl" />
 
       {/* =========================
           Register Card
@@ -114,7 +114,7 @@ const Register = () => {
               Header
           ========================== */}
 
-          <div className="bg-red-600 px-8 py-8 text-center text-white">
+          <div className="bg-blue-600 px-8 py-8 text-center text-white">
 
             <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-white text-3xl shadow-lg">
               🛍️
@@ -124,7 +124,7 @@ const Register = () => {
               Create Account
             </h1>
 
-            <p className="mt-2 text-sm text-red-100">
+            <p className="mt-2 text-sm text-blue-100">
               Join ShopEase and start shopping
             </p>
 
@@ -145,7 +145,7 @@ const Register = () => {
                     .toLowerCase()
                     .includes("success")
                     ? "border-green-200 bg-green-50 text-green-700"
-                    : "border-red-200 bg-red-50 text-red-600"
+                    : "border-blue-200 bg-blue-50 text-blue-600"
                 }`}
               >
                 {msg}
@@ -181,7 +181,7 @@ const Register = () => {
                     onChange={handleChange}
                     placeholder="Enter your username"
                     autoComplete="username"
-                    className="w-full rounded-xl border border-gray-200 bg-gray-50 py-3.5 pl-12 pr-4 text-gray-800 outline-none transition focus:border-red-500 focus:bg-white focus:ring-4 focus:ring-red-100"
+                    className="w-full rounded-xl border border-gray-200 bg-gray-50 py-3.5 pl-12 pr-4 text-gray-800 outline-none transition focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-100"
                   />
 
                 </div>
@@ -219,7 +219,7 @@ const Register = () => {
                     onChange={handleChange}
                     placeholder="Enter your email"
                     autoComplete="email"
-                    className="w-full rounded-xl border border-gray-200 bg-gray-50 py-3.5 pl-12 pr-4 text-gray-800 outline-none transition focus:border-red-500 focus:bg-white focus:ring-4 focus:ring-red-100"
+                    className="w-full rounded-xl border border-gray-200 bg-gray-50 py-3.5 pl-12 pr-4 text-gray-800 outline-none transition focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-100"
                   />
 
                 </div>
@@ -257,7 +257,7 @@ const Register = () => {
                     onChange={handleChange}
                     placeholder="Create a password"
                     autoComplete="new-password"
-                    className="w-full rounded-xl border border-gray-200 bg-gray-50 py-3.5 pl-12 pr-12 text-gray-800 outline-none transition focus:border-red-500 focus:bg-white focus:ring-4 focus:ring-red-100"
+                    className="w-full rounded-xl border border-gray-200 bg-gray-50 py-3.5 pl-12 pr-12 text-gray-800 outline-none transition focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-100"
                   />
 
                   {/* Show / Hide */}
@@ -292,7 +292,7 @@ const Register = () => {
                   type="checkbox"
                   id="terms"
                   required
-                  className="mt-1 h-4 w-4 rounded border-gray-300 accent-red-600"
+                  className="mt-1 h-4 w-4 rounded border-gray-300 accent-blue-600"
                 />
 
                 <label
@@ -300,11 +300,11 @@ const Register = () => {
                   className="text-xs leading-5 text-gray-500"
                 >
                   I agree to the{" "}
-                  <span className="font-semibold text-red-600">
+                  <span className="font-semibold text-blue-600">
                     Terms & Conditions
                   </span>{" "}
                   and{" "}
-                  <span className="font-semibold text-red-600">
+                  <span className="font-semibold text-blue-600">
                     Privacy Policy
                   </span>
                   .
@@ -319,7 +319,7 @@ const Register = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full rounded-xl bg-red-600 py-3.5 font-bold text-white shadow-lg shadow-red-200 transition-all hover:bg-red-700 hover:shadow-xl active:scale-[0.98] disabled:cursor-not-allowed disabled:bg-gray-400 disabled:shadow-none"
+                className="w-full rounded-xl bg-blue-600 py-3.5 font-bold text-white shadow-lg shadow-blue-200 transition-all hover:bg-blue-700 hover:shadow-xl active:scale-[0.98] disabled:cursor-not-allowed disabled:bg-gray-400 disabled:shadow-none"
               >
                 {loading ? (
                   <span className="flex items-center justify-center gap-3">
@@ -365,7 +365,7 @@ const Register = () => {
               <button
                 type="button"
                 onClick={() => navigate("/login")}
-                className="mt-2 rounded-xl border-2 border-red-600 px-6 py-2.5 font-bold text-red-600 transition hover:bg-red-600 hover:text-white"
+                className="mt-2 rounded-xl border-2 border-blue-600 px-6 py-2.5 font-bold text-blue-600 transition hover:bg-blue-600 hover:text-white"
               >
                 Login
               </button>
@@ -381,7 +381,7 @@ const Register = () => {
 
         <button
           onClick={() => navigate("/")}
-          className="mx-auto mt-5 block text-sm font-semibold text-gray-500 transition hover:text-red-600"
+          className="mx-auto mt-5 block text-sm font-semibold text-gray-500 transition hover:text-blue-600"
         >
           ← Back to ShopEase
         </button>

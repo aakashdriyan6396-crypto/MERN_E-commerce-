@@ -124,7 +124,7 @@ const ProductCard = () => {
     return (
       <div className="flex min-h-screen items-center justify-center bg-gray-50">
         <div className="text-center">
-          <div className="mx-auto h-12 w-12 animate-spin rounded-full border-4 border-gray-300 border-t-red-600"></div>
+          <div className="mx-auto h-12 w-12 animate-spin rounded-full border-4 border-gray-300 border-t-blue-600"></div>
 
           <p className="mt-4 font-semibold text-gray-500">
             Loading product...
@@ -152,7 +152,7 @@ const ProductCard = () => {
 
         <button
           onClick={() => navigate("/")}
-          className="rounded-xl bg-red-600 px-6 py-3 font-semibold text-white transition hover:bg-red-700"
+          className="rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700"
         >
           Go Back Home
         </button>
@@ -190,7 +190,7 @@ const ProductCard = () => {
           NAVBAR
       ================================== */}
 
-      <nav className="sticky top-0 z-50 flex w-full items-center justify-between bg-red-600 px-5 py-4 text-white shadow-lg md:px-10 lg:px-20">
+      <nav className="sticky top-0 z-50 flex w-full items-center justify-between bg-blue-600 px-5 py-4 text-white shadow-lg md:px-10 lg:px-20">
 
         {/* Logo */}
 
@@ -207,7 +207,7 @@ const ProductCard = () => {
 
           <button
             onClick={() => navigate("/")}
-            className="rounded-xl bg-white px-4 py-2 text-sm font-bold text-red-600 transition hover:bg-red-50"
+            className="rounded-xl bg-white px-4 py-2 text-sm font-bold text-blue-600 transition hover:bg-blue-50"
           >
             🏠
             <span className="ml-1 hidden sm:inline">
@@ -217,7 +217,7 @@ const ProductCard = () => {
 
           <button
             onClick={() => navigate("/cart")}
-            className="rounded-xl bg-white px-4 py-2 text-sm font-bold text-red-600 transition hover:bg-red-50"
+            className="rounded-xl bg-white px-4 py-2 text-sm font-bold text-blue-600 transition hover:bg-blue-50"
           >
             🛒
             <span className="ml-1 hidden sm:inline">
@@ -227,7 +227,7 @@ const ProductCard = () => {
 
           <button
             onClick={() => navigate("/login")}
-            className="rounded-xl bg-white px-4 py-2 text-sm font-bold text-red-600 transition hover:bg-red-50"
+            className="rounded-xl bg-white px-4 py-2 text-sm font-bold text-blue-600 transition hover:bg-blue-50"
           >
             👨‍💻
             <span className="ml-1 hidden sm:inline">
@@ -249,7 +249,7 @@ const ProductCard = () => {
 
         <button
           onClick={() => navigate(-1)}
-          className="mb-8 flex items-center gap-2 font-semibold text-gray-600 transition hover:text-red-600"
+          className="mb-8 flex items-center gap-2 font-semibold text-gray-600 transition hover:text-blue-600"
         >
           ← Back to Products
         </button>
@@ -283,7 +283,7 @@ const ProductCard = () => {
             {/* Category */}
 
             {product.category && (
-              <p className="mb-4 text-sm font-bold uppercase tracking-widest text-red-600">
+              <p className="mb-4 text-sm font-bold uppercase tracking-widest text-blue-600">
                 {product.category}
               </p>
             )}
@@ -297,7 +297,7 @@ const ProductCard = () => {
                 className={`inline-block rounded-full px-4 py-2 text-sm font-bold ${
                   product.stock > 0
                     ? "bg-green-100 text-green-700"
-                    : "bg-red-100 text-red-700"
+                    : "bg-blue-100 text-blue-700"
                 }`}
               >
                 {product.stock > 0
@@ -330,7 +330,7 @@ const ProductCard = () => {
                 Price
               </p>
 
-              <p className="text-4xl font-extrabold text-red-600">
+              <p className="text-4xl font-extrabold text-blue-600">
                 ₹{product.price}
               </p>
 
@@ -361,7 +361,7 @@ const ProductCard = () => {
             <button
               onClick={() => addToCart(product)}
               disabled={product.stock <= 0}
-              className="w-full rounded-2xl bg-red-600 px-6 py-4 text-lg font-bold text-white transition hover:bg-red-700 disabled:cursor-not-allowed disabled:bg-gray-300"
+              className="w-full rounded-2xl bg-blue-600 px-6 py-4 text-lg font-bold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-300"
             >
               {product.stock > 0
                 ? "🛒 Add to Cart"
@@ -373,7 +373,7 @@ const ProductCard = () => {
 
             <button
               onClick={() => navigate("/")}
-              className="mt-4 w-full rounded-2xl border-2 border-gray-200 px-6 py-4 font-semibold text-gray-700 transition hover:border-red-600 hover:text-red-600"
+              className="mt-4 w-full rounded-2xl border-2 border-gray-200 px-6 py-4 font-semibold text-gray-700 transition hover:border-blue-600 hover:text-blue-600"
             >
               Continue Shopping
             </button>
@@ -395,7 +395,7 @@ const ProductCard = () => {
 
             <div>
 
-              <p className="mb-1 text-sm font-bold uppercase tracking-widest text-red-600">
+              <p className="mb-1 text-sm font-bold uppercase tracking-widest text-blue-600">
                 Recommended For You
               </p>
 
@@ -407,7 +407,7 @@ const ProductCard = () => {
 
             <button
               onClick={() => navigate("/")}
-              className="hidden font-semibold text-red-600 hover:underline sm:block"
+              className="hidden font-semibold text-blue-600 hover:underline sm:block"
             >
               See all →
             </button>
@@ -420,7 +420,7 @@ const ProductCard = () => {
           {productsLoading ? (
             <div className="flex justify-center py-10">
 
-              <div className="h-10 w-10 animate-spin rounded-full border-4 border-gray-200 border-t-red-600"></div>
+              <div className="h-10 w-10 animate-spin rounded-full border-4 border-gray-200 border-t-blue-600"></div>
 
             </div>
           ) : finalProducts.length === 0 ? (
@@ -459,7 +459,7 @@ const ProductCard = () => {
                       className={`absolute right-3 top-3 rounded-full px-3 py-1 text-xs font-bold ${
                         item.stock > 0
                           ? "bg-green-100 text-green-700"
-                          : "bg-red-100 text-red-700"
+                          : "bg-blue-100 text-blue-700"
                       }`}
                     >
                       {item.stock > 0
@@ -477,7 +477,7 @@ const ProductCard = () => {
                     {/* Category */}
 
                     {item.category && (
-                      <p className="mb-1 text-xs font-bold uppercase tracking-wide text-red-500">
+                      <p className="mb-1 text-xs font-bold uppercase tracking-wide text-blue-500">
                         {item.category}
                       </p>
                     )}
@@ -520,7 +520,7 @@ const ProductCard = () => {
                         addToCart(item);
                       }}
                       disabled={item.stock <= 0}
-                      className="mt-4 w-full rounded-xl bg-red-600 px-4 py-3 font-bold text-white transition hover:bg-red-700 disabled:cursor-not-allowed disabled:bg-gray-300"
+                      className="mt-4 w-full rounded-xl bg-blue-600 px-4 py-3 font-bold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-300"
                     >
                       {item.stock > 0
                         ? "🛒 Add to Cart"

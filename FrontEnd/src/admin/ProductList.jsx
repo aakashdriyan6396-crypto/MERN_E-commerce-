@@ -113,14 +113,14 @@ const ProductList = () => {
       {/* =========================
           Header
       ========================== */}
-      <header className="sticky top-0 z-20 bg-red-600 px-6 py-5 text-white shadow-lg md:px-10">
+      <header className="sticky top-0 z-20 bg-blue-600 px-6 py-5 text-white shadow-lg md:px-10">
         <div className="mx-auto flex max-w-7xl flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
             <h1 className="text-2xl font-extrabold md:text-3xl">
               🛍️ Product Management
             </h1>
 
-            <p className="mt-1 text-sm text-red-100">
+            <p className="mt-1 text-sm text-blue-100">
               Manage all your ShopEase products
             </p>
           </div>
@@ -128,7 +128,7 @@ const ProductList = () => {
           <div className="flex gap-3">
             <button
               onClick={() => navigate("/admin")}
-              className="rounded-xl bg-white px-4 py-2.5 font-semibold text-red-600 transition hover:bg-red-50"
+              className="rounded-xl bg-white px-4 py-2.5 font-semibold text-blue-600 transition hover:bg-blue-50"
             >
               ← Dashboard
             </button>
@@ -149,7 +149,7 @@ const ProductList = () => {
       <main className="mx-auto max-w-7xl px-5 py-8 md:px-8">
         {/* Message */}
         {message && (
-          <div className="mb-6 rounded-xl border border-red-200 bg-red-50 px-5 py-4 font-medium text-red-700">
+          <div className="mb-6 rounded-xl border border-blue-200 bg-blue-50 px-5 py-4 font-medium text-blue-700">
             {message}
           </div>
         )}
@@ -187,7 +187,7 @@ const ProductList = () => {
               Out of Stock
             </p>
 
-            <h2 className="mt-2 text-3xl font-bold text-red-600">
+            <h2 className="mt-2 text-3xl font-bold text-blue-600">
               {
                 products.filter(
                   (product) => Number(product.stock) <= 0
@@ -228,7 +228,7 @@ const ProductList = () => {
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   placeholder="Search by title or description..."
-                  className="w-full rounded-xl border border-gray-200 py-3 pl-11 pr-4 outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100"
+                  className="w-full rounded-xl border border-gray-200 py-3 pl-11 pr-4 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
                 />
               </div>
             </div>
@@ -242,7 +242,7 @@ const ProductList = () => {
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100"
+                className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
               >
                 {categories.map((item) => (
                   <option key={item} value={item}>
@@ -259,7 +259,7 @@ const ProductList = () => {
         ========================== */}
         {loading && (
           <div className="flex min-h-[300px] items-center justify-center">
-            <div className="h-12 w-12 animate-spin rounded-full border-4 border-gray-200 border-t-red-600"></div>
+            <div className="h-12 w-12 animate-spin rounded-full border-4 border-gray-200 border-t-blue-600"></div>
           </div>
         )}
 
@@ -280,7 +280,7 @@ const ProductList = () => {
 
             <button
               onClick={() => navigate("/admin/add-product")}
-              className="mt-6 rounded-xl bg-red-600 px-6 py-3 font-semibold text-white transition hover:bg-red-700"
+              className="mt-6 rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700"
             >
               + Add Product
             </button>
@@ -310,7 +310,7 @@ const ProductList = () => {
                     className={`absolute right-3 top-3 rounded-full px-3 py-1 text-xs font-bold ${
                       product.stock > 0
                         ? "bg-green-100 text-green-700"
-                        : "bg-red-100 text-red-700"
+                        : "bg-blue-100 text-blue-700"
                     }`}
                   >
                     {product.stock > 0
@@ -329,7 +329,7 @@ const ProductList = () => {
 
                   {/* Category */}
                   {product.category && (
-                    <span className="mb-3 inline-block rounded-lg bg-red-50 px-2.5 py-1 text-xs font-semibold text-red-600">
+                    <span className="mb-3 inline-block rounded-lg bg-blue-50 px-2.5 py-1 text-xs font-semibold text-blue-600">
                       {product.category}
                     </span>
                   )}
@@ -340,7 +340,7 @@ const ProductList = () => {
 
                   {/* Price */}
                   <div className="mb-5 flex items-center justify-between">
-                    <span className="text-2xl font-extrabold text-red-600">
+                    <span className="text-2xl font-extrabold text-blue-600">
                       ₹{product.price}
                     </span>
 
@@ -367,7 +367,7 @@ const ProductList = () => {
                         handleDelete(product._id)
                       }
                       disabled={deleteLoading === product._id}
-                      className="rounded-xl bg-red-600 px-3 py-2.5 font-semibold text-white transition hover:bg-red-700 disabled:cursor-not-allowed disabled:bg-gray-300"
+                      className="rounded-xl bg-blue-600 px-3 py-2.5 font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-300"
                     >
                       {deleteLoading === product._id
                         ? "Deleting..."

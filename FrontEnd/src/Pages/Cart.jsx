@@ -118,7 +118,7 @@ const Cart = () => {
     return (
       <div className="min-h-screen bg-gray-50">
         {/* Navbar */}
-        <nav className="sticky top-0 lg:px-50 z-50 flex items-center justify-between bg-red-600 px-5 py-4 text-white shadow-lg md:px-10 ">
+        <nav className="sticky top-0 lg:px-50 z-50 flex items-center justify-between bg-blue-600 px-5 py-4 text-white shadow-lg md:px-10 ">
           <h1
             onClick={() => navigate("/")}
             className="cursor-pointer text-2xl font-extrabold"
@@ -128,7 +128,7 @@ const Cart = () => {
 
           <button
             onClick={() => navigate("/login")}
-            className="rounded-xl bg-white px-4 py-2 font-semibold text-red-600 transition hover:bg-red-50"
+            className="rounded-xl bg-white px-4 py-2 font-semibold text-blue-600 transition hover:bg-blue-50"
           >
             👨‍💻 Login
           </button>
@@ -153,7 +153,7 @@ const Cart = () => {
 
             <button
               onClick={() => navigate("/")}
-              className="mt-7 rounded-xl bg-red-600 px-7 py-3 font-bold text-white transition hover:bg-red-700 active:scale-95"
+              className="mt-7 rounded-xl bg-blue-600 px-7 py-3 font-bold text-white transition hover:bg-blue-700 active:scale-95"
             >
               ← Continue Shopping
             </button>
@@ -171,7 +171,7 @@ const Cart = () => {
           Navbar
       ========================== */}
 
-      <nav className="sticky top-0 z-50 flex items-center justify-between bg-red-600 px-5 py-4 text-white shadow-lg md:px-10 lg:px-20">
+      <nav className="sticky top-0 z-50 flex items-center justify-between bg-blue-600 px-5 py-4 text-white shadow-lg md:px-10 lg:px-20">
 
         <h1
           onClick={() => navigate("/")}
@@ -184,14 +184,14 @@ const Cart = () => {
 
           <button
             onClick={() => navigate("/")}
-            className="rounded-xl bg-white px-4 py-2 font-semibold text-red-600 transition hover:bg-red-50"
+            className="rounded-xl bg-white px-4 py-2 font-semibold text-blue-600 transition hover:bg-blue-50"
           >
             🏠 Shop
           </button>
 
           <button
             onClick={() => navigate("/login")}
-            className="rounded-xl bg-white px-4 py-2 font-semibold text-red-600 transition hover:bg-red-50"
+            className="rounded-xl bg-white px-4 py-2 font-semibold text-blue-600 transition hover:bg-blue-50"
           >
             👨‍💻 Login
           </button>
@@ -225,7 +225,7 @@ const Cart = () => {
 
           <button
             onClick={clearCart}
-            className="rounded-xl border border-red-200 px-5 py-2.5 font-semibold text-red-600 transition hover:bg-red-50"
+            className="rounded-xl border border-blue-200 px-5 py-2.5 font-semibold text-blue-600 transition hover:bg-blue-50"
           >
             🗑️ Clear Cart
           </button>
@@ -284,7 +284,7 @@ const Cart = () => {
                               product._id
                             )
                           }
-                          className="text-xl text-gray-400 transition hover:text-red-600"
+                          className="text-xl text-gray-400 transition hover:text-blue-600"
                           title="Remove"
                         >
                           ✕
@@ -309,7 +309,7 @@ const Cart = () => {
                           Price
                         </p>
 
-                        <p className="text-xl font-bold text-red-600">
+                        <p className="text-xl font-bold text-blue-600">
                           ₹
                           {Number(
                             product.price
@@ -334,7 +334,7 @@ const Cart = () => {
                           −
                         </button>
 
-                        <span className="flex h-10 min-w-12 items-center justify-center rounded-lg bg-red-50 px-3 font-bold text-red-600">
+                        <span className="flex h-10 min-w-12 items-center justify-center rounded-lg bg-blue-50 px-3 font-bold text-blue-600">
                           {product.quantity}
                         </span>
 
@@ -348,7 +348,7 @@ const Cart = () => {
                             product.quantity >=
                             product.stock
                           }
-                          className="flex h-10 w-10 items-center justify-center rounded-lg bg-red-600 text-xl font-bold text-white transition hover:bg-red-700 disabled:cursor-not-allowed disabled:bg-gray-300"
+                          className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-600 text-xl font-bold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-300"
                         >
                           +
                         </button>
@@ -386,7 +386,7 @@ const Cart = () => {
 
             <button
               onClick={() => navigate("/")}
-              className="rounded-xl border-2 border-gray-200 bg-white px-6 py-3 font-semibold text-gray-700 transition hover:border-red-600 hover:text-red-600"
+              className="rounded-xl border-2 border-gray-200 bg-white px-6 py-3 font-semibold text-gray-700 transition hover:border-blue-600 hover:text-blue-600"
             >
               ← Continue Shopping
             </button>
@@ -444,7 +444,7 @@ const Cart = () => {
                   Total
                 </span>
 
-                <span className="text-2xl font-extrabold text-red-600">
+                <span className="text-2xl font-extrabold text-blue-600">
                   ₹
                   {total.toLocaleString(
                     "en-IN"
@@ -461,7 +461,7 @@ const Cart = () => {
                     "Checkout functionality coming soon!"
                   );
                 }}
-                className="w-full rounded-xl bg-red-600 px-6 py-4 text-lg font-bold text-white transition hover:bg-red-700 active:scale-95"
+                className="w-full rounded-xl bg-blue-600 px-6 py-4 text-lg font-bold text-white transition hover:bg-blue-700 active:scale-95"
               >
                 Proceed to Checkout →
               </button>

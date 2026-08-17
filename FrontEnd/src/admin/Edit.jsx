@@ -43,10 +43,7 @@ const Edit = () => {
     } catch (error) {
       console.log("Fetch Product Error:", error);
 
-      setError(
-        error.response?.data?.message ||
-          "Unable to fetch product"
-      );
+      setError(error.response?.data?.message || "Unable to fetch product");
     } finally {
       setLoading(false);
     }
@@ -79,19 +76,13 @@ const Edit = () => {
       setMessage("");
       setError("");
 
-      const response = await api.put(
-        `/products/update-product/${id}`,
-        {
-          ...formData,
-          price: Number(formData.price),
-          stock: Number(formData.stock),
-        }
-      );
+      const response = await api.put(`/products/update-product/${id}`, {
+        ...formData,
+        price: Number(formData.price),
+        stock: Number(formData.stock),
+      });
 
-      setMessage(
-        response.data.message ||
-          "Product updated successfully"
-      );
+      setMessage(response.data.message || "Product updated successfully");
 
       setTimeout(() => {
         navigate("/admin/products");
@@ -99,10 +90,7 @@ const Edit = () => {
     } catch (error) {
       console.log("Update Product Error:", error);
 
-      setError(
-        error.response?.data?.message ||
-          "Failed to update product"
-      );
+      setError(error.response?.data?.message || "Failed to update product");
     } finally {
       setSaving(false);
     }
@@ -114,7 +102,7 @@ const Edit = () => {
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-gray-50">
-        <div className="h-12 w-12 animate-spin rounded-full border-4 border-gray-200 border-t-red-600"></div>
+        <div className="h-12 w-12 animate-spin rounded-full border-4 border-gray-200 border-t-blue-600"></div>
       </div>
     );
   }
@@ -125,13 +113,11 @@ const Edit = () => {
   if (error && !formData.title) {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center bg-gray-50 px-5">
-        <h2 className="mb-4 text-2xl font-bold text-red-600">
-          {error}
-        </h2>
+        <h2 className="mb-4 text-2xl font-bold text-blue-600">{error}</h2>
 
         <button
           onClick={() => navigate("/admin/products")}
-          className="rounded-xl bg-red-600 px-6 py-3 font-semibold text-white hover:bg-red-700"
+          className="rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white hover:bg-blue-700"
         >
           ← Back to Products
         </button>
@@ -144,21 +130,21 @@ const Edit = () => {
       {/* =========================
           Header
       ========================== */}
-      <header className="bg-red-600 px-6 py-5 text-white shadow-lg md:px-10">
+      <header className="bg-blue-600 px-6 py-5 text-white shadow-lg md:px-10">
         <div className="mx-auto flex max-w-5xl items-center justify-between">
           <div>
             <h1 className="text-2xl font-extrabold md:text-3xl">
               ✏️ Edit Product
             </h1>
 
-            <p className="mt-1 text-sm text-red-100">
+            <p className="mt-1 text-sm text-blue-100">
               Update your product information
             </p>
           </div>
 
           <button
             onClick={() => navigate("/admin/products")}
-            className="rounded-xl bg-white px-4 py-2 font-semibold text-red-600 hover:bg-red-50"
+            className="rounded-xl bg-white px-4 py-2 font-semibold text-blue-600 hover:bg-blue-50"
           >
             ← Products
           </button>
@@ -181,18 +167,13 @@ const Edit = () => {
             ) : (
               <div className="text-center text-gray-400">
                 <div className="text-6xl">📦</div>
-                <p className="mt-3">
-                  Product image preview
-                </p>
+                <p className="mt-3">Product image preview</p>
               </div>
             )}
           </div>
 
           {/* Form */}
-          <form
-            onSubmit={handleSubmit}
-            className="p-7 md:p-10"
-          >
+          <form onSubmit={handleSubmit} className="p-7 md:p-10">
             <h2 className="mb-7 text-2xl font-bold text-gray-900">
               Product Information
             </h2>
@@ -206,7 +187,7 @@ const Edit = () => {
 
             {/* Error */}
             {error && (
-              <div className="mb-5 rounded-xl border border-red-200 bg-red-50 px-4 py-3 font-medium text-red-700">
+              <div className="mb-5 rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 font-medium text-blue-700">
                 {error}
               </div>
             )}
@@ -224,7 +205,7 @@ const Edit = () => {
                 onChange={handleChange}
                 placeholder="Enter product title"
                 required
-                className="w-full rounded-xl border border-gray-200 px-4 py-3 outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100"
+                className="w-full rounded-xl border border-gray-200 px-4 py-3 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
               />
             </div>
 
@@ -241,7 +222,7 @@ const Edit = () => {
                 placeholder="Enter product description"
                 rows="4"
                 required
-                className="w-full resize-none rounded-xl border border-gray-200 px-4 py-3 outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100"
+                className="w-full resize-none rounded-xl border border-gray-200 px-4 py-3 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
               />
             </div>
 
@@ -260,7 +241,7 @@ const Edit = () => {
                   placeholder="₹ Price"
                   min="0"
                   required
-                  className="w-full rounded-xl border border-gray-200 px-4 py-3 outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100"
+                  className="w-full rounded-xl border border-gray-200 px-4 py-3 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
                 />
               </div>
 
@@ -277,7 +258,7 @@ const Edit = () => {
                   placeholder="Stock"
                   min="0"
                   required
-                  className="w-full rounded-xl border border-gray-200 px-4 py-3 outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100"
+                  className="w-full rounded-xl border border-gray-200 px-4 py-3 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
                 />
               </div>
             </div>
@@ -295,7 +276,7 @@ const Edit = () => {
                 onChange={handleChange}
                 placeholder="e.g. Electronics"
                 required
-                className="w-full rounded-xl border border-gray-200 px-4 py-3 outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100"
+                className="w-full rounded-xl border border-gray-200 px-4 py-3 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
               />
             </div>
 
@@ -312,7 +293,7 @@ const Edit = () => {
                 onChange={handleChange}
                 placeholder="https://example.com/image.jpg"
                 required
-                className="w-full rounded-xl border border-gray-200 px-4 py-3 outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100"
+                className="w-full rounded-xl border border-gray-200 px-4 py-3 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
               />
             </div>
 
@@ -320,9 +301,7 @@ const Edit = () => {
             <div className="grid grid-cols-2 gap-4">
               <button
                 type="button"
-                onClick={() =>
-                  navigate("/admin/products")
-                }
+                onClick={() => navigate("/admin/products")}
                 className="rounded-xl border-2 border-gray-200 px-4 py-3 font-semibold text-gray-700 transition hover:border-gray-400"
               >
                 Cancel
@@ -331,7 +310,7 @@ const Edit = () => {
               <button
                 type="submit"
                 disabled={saving}
-                className="rounded-xl bg-red-600 px-4 py-3 font-bold text-white transition hover:bg-red-700 disabled:cursor-not-allowed disabled:bg-gray-300"
+                className="rounded-xl bg-blue-600 px-4 py-3 font-bold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-300"
               >
                 {saving ? "Updating..." : "✓ Update Product"}
               </button>
