@@ -31,28 +31,65 @@ export const getProductById = async (req, res) => {
 };
 
 
+
+
 export const getProducts = async (req, res) => {
   try {
-    const products = await Product.find().sort({
-      createdAt: -1,
-    });
+    const page = Math.max(1, Number.parseInt(req.query.page, 10) || 1);
+    const limit = Math.min(
+      50,
+      Math.max(1, Number.parseInt(req.query.limit, 10) || 5)
+    );
 
-    res.status(200).json({
+    const search = String(req.query.search || "").trim();
+
+    const filter = {};
+
+    if (search) {
+      const escapedSearch = search.replace(
+        /[.*+?^${}()|[\]\\]/g,
+        "\\$&"
+      );
+
+      const regex = new RegExp(escapedSearch, "i");
+
+      filter.$or = [
+        { title: regex },
+        { name: regex },
+        { description: regex },
+        { category: regex },
+        { brand: regex },
+      ];
+    }
+
+    const totalProducts = await Product.countDocuments(filter);
+    const totalPages = Math.ceil(totalProducts / limit);
+    const safePage = totalPages > 0 ? Math.min(page, totalPages) : 1;
+
+    const products = await Product.find(filter)
+      .sort({ createdAt: -1 })
+      .skip((safePage - 1) * limit)
+      .limit(limit);
+
+    return res.status(200).json({
       success: true,
-      count: products.length,
-      products: products,
+      products,
+      pagination: {
+        currentPage: safePage,
+        totalPages,
+        totalProducts,
+        limit,
+      },
     });
   } catch (error) {
-    console.error("Get Products Error:", error);
+    console.error("Get products error:", error);
 
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: "Failed to fetch products",
-      error: error.message,
     });
   }
 };
-
 
 export const addProducts = async (req, res) => {
   try {

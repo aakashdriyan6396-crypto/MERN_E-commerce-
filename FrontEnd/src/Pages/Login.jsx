@@ -58,7 +58,15 @@ const Login = () => {
       console.log("Login Response:", response.data);
 
       const data = response.data;
+   setForm({
+        email: "",
+        password: "",
+      });
 
+      // Navigate Home
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
       // Check if login was successful
       if (!data.success) {
         setMsg(data.message || "Login failed");
@@ -83,17 +91,9 @@ const Login = () => {
       }
 
       setMsg(data.message || "Login successful");
-
       // Clear form
-      setForm({
-        email: "",
-        password: "",
-      });
+   
 
-      // Navigate Home
-      setTimeout(() => {
-        navigate("/");
-      }, 1000);
 
     } catch (error) {
       console.error("Login Error:", error);
@@ -105,7 +105,9 @@ const Login = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }; 
+
+
 
   return (
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-gray-50 px-5 py-10">
